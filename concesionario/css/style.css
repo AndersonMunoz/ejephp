@@ -56,8 +56,7 @@ body::before {
     align-items: center;
 }
 
-.entrance{
-    background-color: rgb(47, 100, 9);
+.opto{
     display:flex;
     justify-content: center;
     align-items: center;
@@ -72,31 +71,43 @@ body::before {
     box-shadow: 0 0 1px 2px white;
 }
 
-.fa-arrow-right-to-bracket,.fa-arrow-right-from-bracket{
+.fa-solid{
     font-size: 3em;
     margin-top: 5px;
 }
 
-.entrance:hover{
+.entrance-user{
+    background-color: rgb(47, 100, 9);
+}
+
+.entrance-user:hover{
     background-color: rgb(76, 163, 15);
+}
+
+.entrance-car{
+    background-color: rgb(108, 109, 108);
+}
+
+.entrance-car:hover{
+    background-color: rgb(146, 146, 146);
+}
+
+.bus{
+    background-color: rgb(1, 42, 131);
+}
+
+.bus:hover{
+    background-color: rgb(0, 65, 206);
+}
+.opto:hover{
     cursor: pointer;
     transition: all 400ms;
     box-shadow: 0 0 1px 5px white;
-}
+} 
 
 .exit{
     background-color: rgb(158, 12, 12);
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    width: 200px;
-    height: 200px;
-    text-align: center;
-    border-radius: 10px;
-    color: white;
-    font-size: 2em;
-    transition: all 400ms;
-    box-shadow: 0 0 1px 2px white;
+
 }
 
 .exit:hover{
