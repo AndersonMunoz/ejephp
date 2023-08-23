@@ -63,7 +63,6 @@ include './classes/classCliente.php';
                             <option>Escoja una opción</option>
                             <?php
                                 $documentsWithNames = Cliente::getIdWithNames();
-
                                 foreach ($documentsWithNames as $idCliente => $nombreCliente) {
                                     echo '<option value="' . $idCliente . '">' . $idCliente . ' - ' . $nombreCliente . '</option>';
                                 }
@@ -83,6 +82,7 @@ include './classes/classCliente.php';
         $color = $_POST['color_car'];
         $marca = $_POST['marca_cars'];
         $idCliente = $_POST['id_cliente'];
+      /*   $piso = $_POST[]; */
         try {
             $sql = "INSERT INTO carros (placa, color, marca, fk_cliente) VALUES (:placam, :colorm, :marcam, :fk_clientem)";
             $resultado = $base->prepare($sql);
@@ -92,6 +92,37 @@ include './classes/classCliente.php';
                 ':marcam' => $marca,
                 ':fk_clientem' => $idCliente
             ));
+          
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        };
+
+        try{
+            
+        $idvehiculog =$base ->query("SELECT MAX(idCarros) from carros")->fetchColumn();
+        $pisoo=0;
+        $lugaar=0;
+        for ($piso = 0; $piso <= 3; $piso++) {
+            for ($lugar = 0; $lugar < 10; $lugar++) {
+                if (!isset($this->piso["Piso $piso"][$lugar])) {
+                    $this->piso["Piso $piso"][$lugar] = true;
+                    $this->pisoDado = $piso;
+                    $this->lugar = $lugar + 1;
+
+                    // Almacenar resultados en propiedades
+                    $pisoo = $this->pisoDado;
+                    $lugaar = $this->lugar;
+                    
+                }
+            }
+        }
+        $query = "INSERT INTO parqueadero (piso,lugar,fk_carro)VALUES (:pisom,:lugarm,:fk_carrom)";
+                    $resultado2 = $base->prepare($query);
+                    $resultado2 -> execute(array(
+                        ':pisom'=> $pisoo,
+                        ':lugarm'=> $lugaar,
+                        ':fk_carrom'=>64
+                    )); 
         } catch (Exception $e) {
             die('Error: ' . $e->getMessage());
         }

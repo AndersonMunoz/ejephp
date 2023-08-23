@@ -1,7 +1,7 @@
 <?php
-
-require_once("classCliente.php");
-require_once("classVehiculo.php");
+include 'base.php';
+include('./classes/classCliente.php');
+include('./classes/classVehiculo.php');
 
 class Aguacate extends Vehiculo {
     public $strHoraEntrada;
@@ -13,8 +13,8 @@ class Aguacate extends Vehiculo {
     public $resultadoLugar;
 
     
-    public function __construct(Cliente $persona, Vehiculo $carro, string $HoraEntrada, string $HoraSalida){
-        parent::__construct($persona, $carro->strPlaca,$carro->strMarca,$carro->strColor);
+    public function __construct(Cliente $persona,Vehiculo $carro, string $HoraEntrada, string $HoraSalida){
+        parent::__construct($persona,$carro->strPlaca,$carro->strMarca,$carro->strColor);
         $this -> strHoraEntrada =$HoraEntrada;
         $this -> strHoraSalida= $HoraSalida;
         $this -> piso = [
@@ -25,6 +25,8 @@ class Aguacate extends Vehiculo {
         ];
     }
     public function setPisoLugar() {
+        global $base;
+        $idvehiculog =$base ->query("SELECT MAX(idCarros) from carros")->fetchColumn();
         for ($piso = 1; $piso <= 4; $piso++) {
             for ($lugar = 0; $lugar < 10; $lugar++) {
                 if (!isset($this->piso["Piso $piso"][$lugar])) {
@@ -35,7 +37,17 @@ class Aguacate extends Vehiculo {
                     // Almacenar resultados en propiedades
                     $this->resultadoPiso = $this->pisoDado;
                     $this->resultadoLugar = $this->lugar;
+                    
+
+                    $query = "INSERT INTO parqueadero (piso,lugar,fk_carro)VALUES (:pisom,:lugarm,:fk_carrom)";
+                    $resultado2 = $base->prepare($query);
+                    $resultado2 -> execute(array(
+                        ':pisom'=> $piso,
+                        ':lugarm'=> $lugar,
+                        ':fk_carrom'=>$idvehiculog
+                    )); 
                     return;
+
                 }
             }
         }
@@ -43,7 +55,7 @@ class Aguacate extends Vehiculo {
     }
     
     
-    public function getDatosParqueadero() {
+  /*   public function getDatosParqueadero() {
         $datosPersonas = $this->getDatosPersonales();
         $HorasEstacionado = ceil((strtotime($this->strHoraSalida) - strtotime($this->strHoraEntrada)) / 3600);
         $costo = 2000;
@@ -58,7 +70,7 @@ class Aguacate extends Vehiculo {
         $this->setPisoLugar();
 
         return $arrayAguacate;
-    }
+    } */
 }
 
 ?>
