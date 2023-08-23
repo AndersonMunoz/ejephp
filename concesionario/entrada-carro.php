@@ -59,21 +59,16 @@ include './classes/classCliente.php';
                             <option>Mercedez</option>
                         </select><br>
                         <label><br>Seleccione identificación</label> <br>
-                        <select name="marca_cars">
+                        <select name="id_cliente">
                             <option>Escoja una opción</option>
-
                             <?php
-                            $listaId = new Cliente(null, null);
-                            $documents = $listaId->getId();
-                            for ($i = 0; $i < count($documents); $i++) {
-                                echo '<option value=" ' . $i . '">' . $documents[$i] . '</option>';
+                                $documentsWithNames = Cliente::getIdWithNames();
 
-                            }
+                                foreach ($documentsWithNames as $idCliente => $nombreCliente) {
+                                    echo '<option value="' . $idCliente . '">' . $idCliente . ' - ' . $nombreCliente . '</option>';
+                                }
                             ?>
-
-
                         </select><br><br>
-
                         <input class="boton1" type="submit" name="btn1" value="Registrar">
                     </form>
                 </div>
@@ -87,7 +82,7 @@ include './classes/classCliente.php';
         $placa = $_POST['placa_car'];
         $color = $_POST['color_car'];
         $marca = $_POST['marca_cars'];
-        $fk_cliente = $_POST['idNum'];
+        $idCliente = $_POST['id_cliente'];
         try {
             $sql = "INSERT INTO carros (placa, color, marca, fk_cliente) VALUES (:placam, :colorm, :marcam, :fk_clientem)";
             $resultado = $base->prepare($sql);
@@ -95,7 +90,7 @@ include './classes/classCliente.php';
                 ':placam' => $placa,
                 ':colorm' => $color,
                 ':marcam' => $marca,
-                ':fk_clientem' => $fk_cliente
+                ':fk_clientem' => $idCliente
             ));
         } catch (Exception $e) {
             die('Error: ' . $e->getMessage());

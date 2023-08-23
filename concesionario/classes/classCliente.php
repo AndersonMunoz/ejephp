@@ -16,23 +16,22 @@ class Cliente {
         echo "Documento: ".$this->intDocumento."<br><br>";
     }
 
-    public function getId(){
+    public static function getIdWithNames() {
         global $base;
 
         $documentsArray = [];
-        $nameArray = [];
 
-        $sql="SELECT * FROM clientes";
-        $resultado=$base->prepare($sql);
+        $sql = "SELECT idclientes, nombre FROM clientes";
+        $resultado = $base->prepare($sql);
         $resultado->execute(array());
 
-        while($document = $resultado->fetch(PDO::FETCH_ASSOC)){
-            $documentsArray[] = $document["idclientes"];
-            // $nameArray[] = $document['nombre'];
+        while ($document = $resultado->fetch(PDO::FETCH_ASSOC)) {
+            $documentsArray[$document["idclientes"]] = $document["nombre"];
         }
-        // $document = $resultado->fetch(PDO::FETCH_ASSOC);
+
         return $documentsArray;
     }
+    
 }
 
 ?>
