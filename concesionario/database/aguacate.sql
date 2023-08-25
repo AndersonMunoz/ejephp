@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-08-2023 a las 03:21:34
+-- Tiempo de generación: 25-08-2023 a las 03:30:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -40,8 +40,10 @@ CREATE TABLE `carros` (
 --
 
 INSERT INTO `carros` (`idCarros`, `placa`, `marca`, `color`, `fk_cliente`) VALUES
-(41, 'lkl758', 'Mazda', 'Morado', 123),
-(42, 'tyt789', 'Chevrolet', 'Negro', 321);
+(75, 'hff567', 'Mercedez', 'Verde', 321),
+(77, 'hff567', 'Renault', 'Naranja', 123123213),
+(78, 'hff567', 'Renault', 'Amarillo', 123),
+(79, 'vvv333', 'Chevrolet', 'Rosa', 123);
 
 -- --------------------------------------------------------
 
@@ -61,7 +63,8 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`idclientes`, `nombre`, `tipoId`) VALUES
 (123, 'Anderson Muñoz', 'Tarjeta de Indentidad'),
-(321, 'Camilo Narvaez', 'Cédula de Ciudadanía');
+(321, 'Camilo Narvaez', 'Cédula de Ciudadanía'),
+(123123213, 'Daniel Black', 'Tarjeta de Identidad');
 
 -- --------------------------------------------------------
 
@@ -73,7 +76,7 @@ CREATE TABLE `parqueadero` (
   `idParqueadero` int(11) NOT NULL,
   `piso` int(11) DEFAULT NULL,
   `lugar` int(11) DEFAULT NULL,
-  `hora_entrada` datetime DEFAULT NULL,
+  `hora_entrada` datetime DEFAULT current_timestamp(),
   `hora_salida` datetime DEFAULT NULL,
   `pago` float DEFAULT NULL,
   `fk_carro` int(11) DEFAULT NULL
@@ -111,7 +114,7 @@ ALTER TABLE `parqueadero`
 -- AUTO_INCREMENT de la tabla `carros`
 --
 ALTER TABLE `carros`
-  MODIFY `idCarros` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `idCarros` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT de la tabla `parqueadero`
