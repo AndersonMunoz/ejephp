@@ -96,37 +96,51 @@ include './classes/classCliente.php';
         } catch (Exception $e) {
             die('Error: ' . $e->getMessage());
         };
-
-        try{
-            
-        $idvehiculog =$base ->query("SELECT MAX(idCarros) from carros")->fetchColumn();
-        $pisoo=0;
-        $lugaar=0;
-        for ($piso = 0; $piso <= 3; $piso++) {
-            for ($lugar = 0; $lugar < 10; $lugar++) {
-                if (!isset($this->piso["Piso $piso"][$lugar])) {
-                    $this->piso["Piso $piso"][$lugar] = true;
-                    $this->pisoDado = $piso;
-                    $this->lugar = $lugar + 1;
-
-                    // Almacenar resultados en propiedades
-                    $pisoo = $this->pisoDado;
-                    $lugaar = $this->lugar;
-                    
+    }
+    if (isset($_POST['btn1'])) {
+        try {
+            $placa = $_POST['placa_car'];
+            $color = $_POST['color_car'];
+            $marca = $_POST['marca_cars'];
+            $idCliente = $_POST['id_cliente'];
+    
+            // Obtén los datos del cliente desde la base de datos
+            $datosCliente = obtenerDatosCliente($idCliente);
+    
+            // Crea instancias de las clases Cliente y Vehiculo
+            $cliente = new Cliente($datosCliente['nombre'], $datosCliente['tipoId']);
+            $vehiculo = new Vehiculo($cliente, $placa, $marca, $color);
+    
+            $aguacate = new Aguacate($cliente, $vehiculo, '');
+    
+            // Llama a la función para asignar espacios de estacionamiento
+            $espacioAsignado = $aguacate->asignarLugares();
+    
+            if ($espacioAsignado) {
+                // Inserta los datos en la tabla parqueadero
+                $query = "INSERT INTO parqueadero (piso, lugar, fk_carro) VALUES (:pisom, :lugarm, :fk_carrom)";
+                $resultado2 = $base->prepare($query);
+                
+                // Verifica si la consulta se ejecutó correctamente
+                if ($resultado2->execute(array(
+                    ':pisom' => $espacioAsignado['piso'],
+                    ':lugarm' => $espacioAsignado['lugar'],
+                    ':fk_carrom' => $idvehiculog
+                ))) {
+                    echo "El carro fue registrado en el parqueadero en el piso {$espacioAsignado['piso']} y lugar {$espacioAsignado['lugar']}.";
+                } else {
+                    // Imprime el error si la consulta no se ejecutó correctamente
+                    print_r($resultado2->errorInfo());
                 }
+            } else {
+                echo "No hay lugares disponibles.";
             }
-        }
-        $query = "INSERT INTO parqueadero (piso,lugar,fk_carro)VALUES (:pisom,:lugarm,:fk_carrom)";
-                    $resultado2 = $base->prepare($query);
-                    $resultado2 -> execute(array(
-                        ':pisom'=> $pisoo,
-                        ':lugarm'=> $lugaar,
-                        ':fk_carrom'=>64
-                    )); 
         } catch (Exception $e) {
             die('Error: ' . $e->getMessage());
         }
-    };
+    }
+    
+    
 
     ?>
     <script>

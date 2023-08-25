@@ -6,7 +6,7 @@
 
 a{
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 body::before {
@@ -101,6 +101,7 @@ form{
     left: 10px;
     top: 10px;
     transition: all 400ms;
+    color: white;
 }
 
 .home:hover{

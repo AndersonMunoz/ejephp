@@ -3,7 +3,7 @@ include 'base.php';
 include('./classes/classCliente.php');
 include('./classes/classVehiculo.php');
 
-class Aguacate extends Vehiculo {
+class Aguacate  {
     public $strHoraEntrada;
     public $strHoraSalida;
     public $piso;
@@ -13,9 +13,7 @@ class Aguacate extends Vehiculo {
     public $resultadoLugar;
 
     
-    public function __construct(Cliente $persona,Vehiculo $carro, string $HoraEntrada, string $HoraSalida){
-        parent::__construct($persona,$carro->strPlaca,$carro->strMarca,$carro->strColor);
-        $this -> strHoraEntrada =$HoraEntrada;
+    public function __construct(int $piso, int $lugar,string $strHoraEntrada){
         $this -> strHoraSalida= $HoraSalida;
         $this -> piso = [
             'Piso 1' => [],
@@ -26,33 +24,36 @@ class Aguacate extends Vehiculo {
     }
     public function setPisoLugar() {
         global $base;
-        $idvehiculog =$base ->query("SELECT MAX(idCarros) from carros")->fetchColumn();
-        for ($piso = 1; $piso <= 4; $piso++) {
-            for ($lugar = 0; $lugar < 10; $lugar++) {
-                if (!isset($this->piso["Piso $piso"][$lugar])) {
-                    $this->piso["Piso $piso"][$lugar] = true;
-                    $this->pisoDado = $piso;
-                    $this->lugar = $lugar + 1;
-
-                    // Almacenar resultados en propiedades
-                    $this->resultadoPiso = $this->pisoDado;
-                    $this->resultadoLugar = $this->lugar;
-                    
-
-                    $query = "INSERT INTO parqueadero (piso,lugar,fk_carro)VALUES (:pisom,:lugarm,:fk_carrom)";
-                    $resultado2 = $base->prepare($query);
-                    $resultado2 -> execute(array(
-                        ':pisom'=> $piso,
-                        ':lugarm'=> $lugar,
-                        ':fk_carrom'=>$idvehiculog
-                    )); 
-                    return;
-
-                }
-            }
+        $idvehiculog = $base->query("SELECT MAX(idCarros) from carros")->fetchColumn();
+        
+        // Arreglo con los pisos y lugares disponibles
+        $pisos = [
+            'Piso 1' => [],
+            'Piso 2' => [],
+            'Piso 3' => [],
+            'Piso 4' => []
+        ];
+        
+        $asignacion = asignarLugares($pisos);
+        
+        if ($asignacion) {
+            $pisoAsignado = $asignacion['piso'];
+            $lugarAsignado = $asignacion['lugar'];
+            
+            $query = "INSERT INTO parqueadero (piso, lugar, fk_carro) VALUES (:pisom, :lugarm, :fk_carrom)";
+            $resultado2 = $base->prepare($query);
+            $resultado2->execute(array(
+                ':pisom' => $pisoAsignado,
+                ':lugarm' => $lugarAsignado,
+                ':fk_carrom' => $idvehiculog
+            ));
+            
+            echo "Lugar asignado exitosamente en Piso $pisoAsignado, Lugar $lugarAsignado.";
+        } else {
+            echo "No hay lugares disponibles.<br>";
         }
-        echo "No hay lugares disponibles.<br>";
     }
+    
     
     
   /*   public function getDatosParqueadero() {

@@ -1,0 +1,122 @@
+* {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin:0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/back.jpg);
+    background-size: cover;
+    filter: blur(5px); /* Ajusta el valor de "5px" según el grado de desenfoque deseado */
+    z-index: -1;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.titulo2 {
+    text-align: center;
+    background-color: rgb(151, 212, 240);
+    color: black;
+}
+
+.titulo3 {
+    text-align: center;
+    background-color: rgb(59, 149, 190);
+    color: white;
+}
+
+
+.home{
+    position: fixed;
+    display: flex;
+    background-color: rgba(182, 182, 182, 0.4);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    left: 10px;
+    top: 10px;
+    transition: all 400ms;
+}
+
+.home:hover{
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 400ms;
+    box-shadow: 0 0 1px 2px white;
+    color: white;
+}
+
+td {
+    padding: 10px;
+}
+
+
+table {
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.titulo{
+    background-color: rgb(20, 54, 105);
+    color: white;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.delete{
+    color: red;
+    transition: all 400ms;
+}
+
+.delete:hover{
+    color: rgb(255, 103, 103);
+    transition: all 400ms;
+    cursor: pointer;
+}
+
+.edit{
+    color: blue;
+    transition: all 400ms;
+}
+
+.edit:hover{
+    color: rgb(103, 103, 255);
+    transition: all 400ms;
+    cursor: pointer;
+}
+
+.mainn{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    width: 100%;
+}
+
+.super-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
