@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use PDF;
 
 class UserController extends Controller
 {
@@ -31,5 +32,11 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->route('listar');
+    }
+
+    public function descargarPDF($id){
+        $user = User::find($id);
+        $pdf = PDF::loadView('pdf.imprimir', compact('user'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->stream($user->name . '.pdf');
     }
 }
