@@ -28,11 +28,16 @@ Listar Usuarios
                     <td class="py-2 px-4 border">{{ $data->phone }}</td>
                     <td class="py-2 px-4 border">{{ $data->address }}</td>
                     <td class="py-2 px-4 border"><a href="{{route("actualizar", $data->id)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                    <td class="py-2 px-4 border"><i class="fa-solid fa-trash"></i></td>
+                    <td class="py-2 px-4 border">
+                        <form action="{{ route('eliminar', $data->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </td>
+                    
                 </tr>
                 @endforeach
-
-                <!-- Puedes agregar más filas según sea necesario -->
             </tbody>
         </table>
     </div>

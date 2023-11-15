@@ -35,3 +35,5 @@ Route::get('/listar',[UserController::class,'listar'])->name('listar');
 
 Route::get('/actualizar/{id}',[UserController::class,'actualizar'])->name('actualizar');
 Route::put('/editar/{id}',[UserController::class,'editar'])->name('editar');
+
+Route::delete('/eliminar/{id}',[UserController::class,'eliminar'])->name('eliminar');

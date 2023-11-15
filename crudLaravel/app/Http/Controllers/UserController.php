@@ -26,4 +26,10 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('listar');
     }
+
+    public function eliminar($id){
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('listar');
+    }
 }
