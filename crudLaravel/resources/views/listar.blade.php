@@ -7,7 +7,7 @@ Listar Usuarios
 @section('contenido')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
 <div class="flex flex-col justify-center items-center w-fulls">
-    <a href="/registrar"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Crear nuevo usuario</button></a>
+    <a href="/registrar"><button class="bg-green-700 hover:bg-green-400 text-white font-bold py-2 px-4 rounded mb-4">Crear nuevo usuario</button></a>
     <div class="w-96">
         <table class="min-w-full bg-white border rounded-md overflow-hidden">
             <thead class="bg-green-700 text-white">
@@ -27,7 +27,7 @@ Listar Usuarios
                     <td class="py-2 px-4 border">{{ $data->identification }}</td>
                     <td class="py-2 px-4 border">{{ $data->phone }}</td>
                     <td class="py-2 px-4 border">{{ $data->address }}</td>
-                    <td class="py-2 px-4 border"><a href="{{ route('articles.edit', $article->id) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td class="py-2 px-4 border"><a href="{{route("actualizar", $data->id)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                     <td class="py-2 px-4 border"><i class="fa-solid fa-trash"></i></td>
                 </tr>
                 @endforeach
@@ -37,6 +37,4 @@ Listar Usuarios
         </table>
     </div>
 </div>
-
-
 @endsection

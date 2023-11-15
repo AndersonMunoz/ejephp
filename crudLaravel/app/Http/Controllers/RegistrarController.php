@@ -16,7 +16,7 @@ class RegistrarController extends Controller
             'name'=>'required|min:3|max:50',
             'identification'=>'required|unique:users|min:10',
             'phone'=>'required|integer|min:6',
-            'address' => 'required|min:6'
+            'address' => 'required|min:3'
         ]);
         User::create([
             'name'=>$request->name,

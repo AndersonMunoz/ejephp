@@ -33,7 +33,7 @@ Registrar Usuario
                     <p class="bg-red-600 text-white text-center rounded-lg">{{ $message }}</p>
                 @enderror
 
-        <button type="submit" class="mt-10 p-3 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Registrar</button>
+        <button type="submit" class="mt-10 p-3 bg-green-700 hover:bg-green-400 text-white py-2 px-4 rounded-md ">Registrar</button>
 
       </form>
     </div>

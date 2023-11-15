@@ -33,8 +33,5 @@ Route::post('/registrar',[RegistrarController::class,'store']);
 
 Route::get('/listar',[UserController::class,'listar'])->name('listar');
 
-Route::get('/actualizar',[UserController::class,'actualizar'])->name('actulizar');
-Route::get('articles/{id}/edit', [
-    'as' => 'articles.edit',
-    'uses' => 'YourController@yourMethod'
-]);
+Route::get('/actualizar/{id}',[UserController::class,'actualizar'])->name('actualizar');
+Route::put('/editar/{id}',[UserController::class,'editar'])->name('editar');

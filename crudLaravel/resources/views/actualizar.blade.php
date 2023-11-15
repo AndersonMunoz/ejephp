@@ -7,24 +7,23 @@ Actualizar Usuario
 @section('contenido')
 <div class="flex justify-center">
     <div class="w-96 flex justify-center">
-      <form method="post" class="w-96 flex flex-col p-3">
+      <form action="{{route('editar',$user->id)}}" method="post" class="w-96 flex flex-col p-3">
         @csrf
-        <label class="p-3" for="name">Nombre:</label>
-        <input type="text" id="name" name="name" class="p-3 border border-gray-400 p-2 rounded-md" required>
+        @method("PUT")
+        <label  for="name">Nombre:</label>
+        <input type="text" id="name" name="name" class="form-control p-3 border border-gray-400 p-2 rounded-md" required value="{{$user->name}}">
+        
+        <label  for="identification">Identificación:</label>
+        <input type="text" id="identification" name="identification" class="form-control p-3 border border-gray-400 p-2 rounded-md" required value="{{$user->identification}}">
 
-        <label class="p-3" for="identification">Identificación:</label>
-        <input type="text" id="identification" name="identification" class="p-3 border border-gray-400 p-2 rounded-md" required>
+        <label  for="phone">Teléfono:</label>
+        <input type="tel" id="phone" name="phone" class="form-control p-3 border border-gray-400 p-2 rounded-md" required value="{{$user->phone}}">
 
-        <label class="p-3" for="phone">Teléfono:</label>
-        <input type="tel" id="phone" name="phone" class="p-3 border border-gray-400 p-2 rounded-md" required>
+        <label  for="address">Dirección:</label>
+        <input type="text" id="address" name="address" class="form-control  p-3 border border-gray-400 p-2 rounded-md" required value="{{$user->address}}">
 
-        <label class="p-3" for="address">Dirección:</label>
-        <input type="text" id="address" name="address" class=" p-3 border border-gray-400 p-2 rounded-md" required>
-
-        <button type="submit" class="mt-10 p-3 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Actualizar</button>
+        <button type="submit" class="mt-10 p-3 bg-green-700 hover:bg-green-400 text-white py-2 px-4 rounded-md ">Actualizar</button>
       </form>
     </div>
   </div>
-
-
 @endsection

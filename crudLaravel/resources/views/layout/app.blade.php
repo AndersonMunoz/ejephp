@@ -16,9 +16,9 @@
                 </div>
 
                 <ul class="flex space-x-4">
-                    <li><a href="/" class="text-white">Inicio</a></li>
-                    <li><a href="registrar" class="text-white">Registrar</a></li>
-                    <li><a href="listar" class="text-white">Listar</a></li>
+                    <li><a href="/" class="text-white p-4 hover:bg-green-500">Inicio</a></li>
+                    <li><a href="{{ route('registrar') }}" class="text-white p-4 hover:bg-green-500">Registrar</a></li>
+                    <li><a href="{{ route('listar') }}" class="text-white p-4 hover:bg-green-500">Listar</a></li>
                 </ul>
             </div>
         </nav>
