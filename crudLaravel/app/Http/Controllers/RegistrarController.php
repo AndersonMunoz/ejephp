@@ -13,11 +13,12 @@ class RegistrarController extends Controller
     }
     public function store(Request $request) {
         $this ->validate($request,[
-            'name'=>'required|min:3|max:50',
-            'identification'=>'required|unique:users|min:10',
-            'phone'=>'required|integer|min:6',
+            'name'=>'required|regex:/^[\pL\s]+$/u|min:3|max:50',
+            'identification'=>'required|unique:users|integer|digits:10',
+            'phone'=>'required|integer|digits:10',
             'address' => 'required|min:3'
         ]);
+        
         User::create([
             'name'=>$request->name,
             'identification'=>$request->identification,
