@@ -9,14 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+     //$table->foreign('idcategoria')->references('id')->on('categorias');
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('lastname');
+            $table->timestamp('email')->nullable();
+            $table->date('birthday')->nullable();;
             $table->string('password');
+            $table->string('area')->nullable();;
+            $table->enum('rol', ['student', 'teacher', 'admin']);
             $table->rememberToken();
             $table->timestamps();
         });
